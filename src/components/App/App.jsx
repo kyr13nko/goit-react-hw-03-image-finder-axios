@@ -28,36 +28,38 @@ class App extends Component {
   componentDidUpdate(_, prevState) {
     const { searchValue, page } = this.state;
 
-    if (searchValue !== prevState.searchValue || page !== prevState.page) {
+    if (searchValue !== prevState.searchValue || page !== prevState.page)
+      this.fetchImage();
+  }
+
+  fetchImage = async () => {
+    const { searchValue, page } = this.state;
+
+    try {
       this.setState({ isLoader: true });
 
-      getImage(searchValue, page)
-        .then(data => {
-          if (!data.totalHits) {
-            toast.warning(
-              `"${searchValue}" not found. Please enter something else.`
-            );
-            return;
-          }
+      const data = await getImage(searchValue, page);
 
-          const lastPage = Math.ceil(data.totalHits / 12);
+      if (!data.totalHits) {
+        toast.warning(
+          `"${searchValue}" not found. Please enter something else.`
+        );
+        return;
+      }
 
-          if (page === lastPage) {
-            this.setState({ isLoadBtn: true });
-            toast.info('Thats all images');
-          }
+      const lastPage = Math.ceil(data.totalHits / 12);
+      if (page === lastPage) {
+        this.setState({ isLoadBtn: true });
+        toast.info('Thats all images');
+      }
 
-          this.setState(prev => ({ hits: [...prev.hits, ...data.hits] }));
-        })
-        .catch(error => {
-          console.log(error);
-          return toast.error('Something went wrong. Please try again later.');
-        })
-        .finally(() => {
-          this.setState({ isLoader: false });
-        });
+      this.setState(prev => ({ hits: [...prev.hits, ...data.hits] }));
+    } catch (error) {
+      toast.error('Something went wrong. Please try again later.');
+    } finally {
+      this.setState({ isLoader: false });
     }
-  }
+  };
 
   handleSubmit = searchValue => {
     this.setState({ searchValue, page: 1, hits: [], isLoadBtn: false });
