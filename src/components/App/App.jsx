@@ -76,6 +76,11 @@ class App extends Component {
     this.toggleModal();
   };
 
+  closeModal = () => {
+    this.setState({ modalImage: '', tags: '' });
+    this.toggleModal();
+  };
+
   render() {
     const { hits, isLoader, isLoadBtn, showModal, modalImage, tags } =
       this.state;
@@ -98,7 +103,7 @@ class App extends Component {
         {showLoadBtn && <Button onBtnClick={() => this.handleLoadMore()} />}
 
         {showModal && (
-          <Modal onClose={this.toggleModal}>
+          <Modal onClose={this.closeModal}>
             <Image src={modalImage} alt={tags} />
           </Modal>
         )}
