@@ -20,9 +20,7 @@ class App extends Component {
     hits: null,
     isLoader: false,
     isLoadBtn: false,
-    showModal: false,
-    modalImage: '',
-    tags: '',
+    modalData: null,
   };
 
   componentDidUpdate(_, prevState) {
@@ -69,23 +67,22 @@ class App extends Component {
     this.setState(prev => ({ page: prev.page + 1 }));
   };
 
-  toggleModal = () => {
-    this.setState(prev => ({ showModal: !prev.showModal }));
-  };
+  // toggleModal = () => {
+  //   this.setState(prev => ({ showModal: !prev.showModal }));
+  // };
 
   handleImageClick = (largeImageURL, tags) => {
-    this.setState({ modalImage: largeImageURL, tags });
-    this.toggleModal();
+    this.setState({ modalData: { modalImage: largeImageURL, tags } });
+    // this.toggleModal();
   };
 
   closeModal = () => {
-    this.setState({ modalImage: '', tags: '' });
-    this.toggleModal();
+    this.setState({ modalData: null });
+    // this.toggleModal();
   };
 
   render() {
-    const { hits, isLoader, isLoadBtn, showModal, modalImage, tags } =
-      this.state;
+    const { hits, isLoader, isLoadBtn, modalData } = this.state;
     const showLoadBtn = hits && hits.length > 0 && !isLoadBtn;
     return (
       <Container>
@@ -104,9 +101,9 @@ class App extends Component {
 
         {showLoadBtn && <Button onBtnClick={() => this.handleLoadMore()} />}
 
-        {showModal && (
+        {modalData && (
           <Modal onClose={this.closeModal}>
-            <Image src={modalImage} alt={tags} />
+            <Image src={modalData.modalImage} alt={modalData.tags} />
           </Modal>
         )}
 
