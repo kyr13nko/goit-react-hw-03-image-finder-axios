@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/goit-react-hw-03-image-finder-axios/static/css/main.601e3bfc.css",
-    "main.js": "/goit-react-hw-03-image-finder-axios/static/js/main.59b82e86.js",
+    "main.js": "/goit-react-hw-03-image-finder-axios/static/js/main.3fee9a4d.js",
     "static/media/search.svg": "/goit-react-hw-03-image-finder-axios/static/media/search.d5dc423ffeebecbe3271ab70515d2eee.svg",
     "index.html": "/goit-react-hw-03-image-finder-axios/index.html",
     "main.601e3bfc.css.map": "/goit-react-hw-03-image-finder-axios/static/css/main.601e3bfc.css.map",
-    "main.59b82e86.js.map": "/goit-react-hw-03-image-finder-axios/static/js/main.59b82e86.js.map"
+    "main.3fee9a4d.js.map": "/goit-react-hw-03-image-finder-axios/static/js/main.3fee9a4d.js.map"
   },
   "entrypoints": [
     "static/css/main.601e3bfc.css",
-    "static/js/main.59b82e86.js"
+    "static/js/main.3fee9a4d.js"
   ]
 }
